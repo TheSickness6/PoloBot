@@ -29,7 +29,7 @@ while True:
 	print ("1.Spin in place")
 	print ("2.Rotate around a certain radius")
 	print ("3.Upload custom trajectory")
-	print ("4.Enter desired position")
+	print ("4.Enter desired Speed")
 	menuopt=input("Select from the above options: ")
 #------------------------------------------------------------------------------------------------------
 #Option 1: Rotate in place
@@ -37,18 +37,18 @@ while True:
 	if (menuopt=='1'):
 		print ("Ok!")
 		vm=0
-		wm=input("How fast would you like to spin? In units or Degrees per second: ")
+		wm=input("How fast would you like to spin? In units or rotations per second: ")
 		dir=input("In which direction? Enter cw for CLOCKWISE and ccw for COUNTER CLOCKWISE: ")
 		if dir=='ccw':
 			#Get Wheel speed
-			Bot.getready()
-			rd, ld = Marco.POLOspeed(float(vm), float(wm))
+			#Bot.getready()
+			rd, ld = Marco.POLOspeed(float(vm), float(wm)*360)
 			Bot.sendspeed(Marco.WRpul, Marco.WLpul, rd, ld)
 			time.sleep(30)
 			Bot.stop()
 		elif dir=='cw':
-			Bot.getready()
-			rd, ld = Marco.POLOspeed(float(vm), -float(wm))
+			#Bot.getready()
+			rd, ld = Marco.POLOspeed(float(vm), -float(wm)*360)
 			Bot.sendspeed(Marco.WRpul, Marco.WLpul, rd, ld)
 			time.sleep(30)
 			Bot.stop()
@@ -57,10 +57,10 @@ while True:
 #------------------------------------------------------------------------------------------------------
 	elif menuopt=='2':
 		print ("Great!")
-		rads=input("What is the radius? Should be in inches!")
-		wm=input("How many degrees should I rotate in a second")
+		rads=input("What is the radius? Should be in inches!: ")
+		wm=input("How many degrees should I rotate in a second: ")
 		vm=Find.circle(float(rads),float(wm))
-		Bot.getready()
+		#Bot.getready()
 		rd,ld=Marco.POLOspeed(vm,float(wm))
 		Bot.sendspeed(Marco.WRpul,Marco.WLpul,rd,ld)
 		time.sleep(30)
@@ -72,7 +72,7 @@ while True:
 		vm=input('Linear Velovity (m/s): ')
 		wm=input('Angular Velocity (degrees/s): ')
 		tm=input('Time Duration: ')
-		Bot.getready()
+		#Bot.getready()
 		rd,ld=Marco.POLOspeed(float(vm),float(wm))
 		Bot.sendspeed(Marco.WRpul,Marco.WLpul,rd,ld)
 		time.sleep(float(tm))
@@ -81,13 +81,12 @@ while True:
 #Option 4: Distance
 #------------------------------------------------------------------------------------------------------
 	elif menuopt=='4':
-		d=input('Distance (inches): ')
-		tm=input('Time Duration (sec): ')
-		vm=Bot.InchtoM*float(d)/float(tm)
-		Bot.getready()
-		rd,ld=Marco.POLOspeed(vm,wm)
+		d=input('Speed Vm: ')
+		wm=0
+		#Bot.getready()
+		rd,ld=Marco.POLOspeed(float(d),wm)
 		Bot.sendspeed(Marco.WRpul,Marco.WLpul,rd,ld)
-		time.sleep(float(tm))
+		time.sleep(30)
 		Bot.stop()
 	time.sleep(1)
 
