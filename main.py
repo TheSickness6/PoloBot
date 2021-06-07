@@ -1,5 +1,5 @@
 # Author: Gabriel Campa
-# Project: 3 Wheel Blind Robot
+# Project: 2 Wheel Drive Blind Robot
 # Main file
 #------------------------------------------------------------------------------------------------------
 from POLOfunct import *
